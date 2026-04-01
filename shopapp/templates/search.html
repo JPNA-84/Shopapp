@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Search</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Georgia, serif; background: #f4f1ec; color: #1a1a1a; padding: 40px 20px; }
+    .container { max-width: 700px; margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; }
+    h1 { font-size: 1.5rem; }
+    .topbar a { font-size: 0.85rem; color: #555; }
+    form { display: flex; gap: 10px; margin-bottom: 32px; }
+    input[type=text] { flex: 1; padding: 10px; border: 1px solid #ccc; font-size: 1rem; font-family: inherit; }
+    input[type=text]:focus { outline: 2px solid #1a1a1a; }
+    button { background: #1a1a1a; color: #fff; border: none; padding: 10px 20px; font-size: 1rem; cursor: pointer; font-family: inherit; }
+    button:hover { background: #333; }
+    .product { background: #fff; border: 1px solid #ddd; padding: 18px 20px; margin-bottom: 12px; }
+    .product-id { font-size: 0.75rem; color: #999; margin-bottom: 4px; }
+    .product-name { font-size: 1.1rem; font-weight: bold; margin-bottom: 6px; }
+    .product-desc { font-size: 0.9rem; color: #555; }
+    .no-results { color: #888; font-size: 0.95rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="topbar">
+      <h1>Product Search</h1>
+      <span>Hello, {{ user }} &nbsp;|&nbsp; <a href="/logout">Log out</a></span>
+    </div>
+    <form method="GET">
+      <input type="text" name="q" placeholder="Search products..." value="{{ query }}">
+      <button type="submit">Search</button>
+    </form>
+    {% if query %}
+      {% if products %}
+        {% for p in products %}
+        <div class="product">
+          <div class="product-id">ID: {{ p[0] }}</div>
+          <div class="product-name">{{ p[1] }}</div>
+          <div class="product-desc">{{ p[2] }}</div>
+        </div>
+        {% endfor %}
+      {% else %}
+        <p class="no-results">No products found for "{{ query }}".</p>
+      {% endif %}
+    {% endif %}
+  </div>
+</body>
+</html>
