@@ -24,4 +24,4 @@ jobs:
           context: ./shopapp
           file: ./shopapp/Dockerfile
           push: true
-          tags: johnpaul/shopapp:latest
+          tags: tdwl/shopapp:latest
